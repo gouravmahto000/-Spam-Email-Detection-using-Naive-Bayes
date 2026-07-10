@@ -1,0 +1,357 @@
+======================== NAIVE BAYES INTERVIEW QUESTIONS & ANSWERS ========================
+
+1. What is Naive Bayes?
+Answer:
+Naive Bayes is a supervised machine learning algorithm based on Bayes' Theorem. It is mainly used for classification problems such as spam detection, sentiment analysis, document classification, and medical diagnosis. It predicts the probability that a data point belongs to a particular class.
+
+--------------------------------------------------------------------------------------------
+
+2. Why is it called "Naive"?
+Answer:
+It is called "Naive" because it assumes that all input features are independent of each other, even though this assumption is rarely true in real-world datasets.
+
+--------------------------------------------------------------------------------------------
+
+3. What is Bayes' Theorem?
+Answer:
+Bayes' Theorem calculates the probability of an event based on prior knowledge.
+
+Formula:
+P(A|B) = (P(B|A) × P(A)) / P(B)
+
+Where:
+P(A|B) = Posterior Probability
+P(B|A) = Likelihood
+P(A) = Prior Probability
+P(B) = Evidence
+
+--------------------------------------------------------------------------------------------
+
+4. Explain Prior, Posterior, Likelihood, and Evidence.
+Answer:
+Prior = Initial probability before observing data.
+Likelihood = Probability of observing the data given the class.
+Posterior = Updated probability after observing the data.
+Evidence = Overall probability of the observed data.
+
+--------------------------------------------------------------------------------------------
+
+5. What are the assumptions of Naive Bayes?
+Answer:
+1. Features are independent.
+2. Every feature contributes equally.
+3. No relationship exists among predictor variables.
+
+--------------------------------------------------------------------------------------------
+
+6. Is the independence assumption always true?
+Answer:
+No. In real-world datasets, features are often correlated. Despite this, Naive Bayes performs well because classification depends on relative probabilities.
+
+--------------------------------------------------------------------------------------------
+
+7. Why does Naive Bayes perform well despite unrealistic assumptions?
+Answer:
+Even when features are dependent, the algorithm often predicts the correct class because it compares relative probabilities rather than exact probabilities.
+
+--------------------------------------------------------------------------------------------
+
+8. What are the different types of Naive Bayes?
+Answer:
+1. Gaussian Naive Bayes
+2. Multinomial Naive Bayes
+3. Bernoulli Naive Bayes
+4. Complement Naive Bayes
+5. Categorical Naive Bayes
+
+--------------------------------------------------------------------------------------------
+
+9. What is Gaussian Naive Bayes?
+Answer:
+Gaussian Naive Bayes is used for continuous numerical features that follow a normal (Gaussian) distribution.
+
+Examples:
+Height
+Weight
+Salary
+Temperature
+
+--------------------------------------------------------------------------------------------
+
+10. What is Multinomial Naive Bayes?
+Answer:
+Multinomial Naive Bayes is used for count-based features such as word frequencies. It is the most commonly used algorithm for text classification.
+
+--------------------------------------------------------------------------------------------
+
+11. What is Bernoulli Naive Bayes?
+Answer:
+Bernoulli Naive Bayes is used for binary features where values are either 0 or 1 (present/absent, yes/no, true/false).
+
+--------------------------------------------------------------------------------------------
+
+12. What is Complement Naive Bayes?
+Answer:
+Complement Naive Bayes is designed for imbalanced datasets and often performs better than Multinomial Naive Bayes on skewed text classification problems.
+
+--------------------------------------------------------------------------------------------
+
+13. What is Categorical Naive Bayes?
+Answer:
+Categorical Naive Bayes is used when all input features are categorical.
+
+--------------------------------------------------------------------------------------------
+
+14. Difference between Gaussian, Multinomial, and Bernoulli Naive Bayes.
+
+Gaussian NB:
+- Continuous features
+- Assumes normal distribution
+- Example: Height, Weight
+
+Multinomial NB:
+- Count-based features
+- Word frequency
+- Example: Spam Detection
+
+Bernoulli NB:
+- Binary features
+- Word present/absent
+- Example: Binary Text Classification
+
+--------------------------------------------------------------------------------------------
+
+15. Why is Multinomial Naive Bayes best for Spam Detection?
+Answer:
+Because text data is converted into word counts using CountVectorizer or TF-IDF, which perfectly matches Multinomial Naive Bayes.
+
+--------------------------------------------------------------------------------------------
+
+16. Can Gaussian Naive Bayes be used for text data?
+Answer:
+Yes, but it is generally not recommended because text features do not follow a Gaussian distribution.
+
+--------------------------------------------------------------------------------------------
+
+17. Why is toarray() used in GaussianNB?
+
+Example:
+g_model.fit(X_train.toarray(), y_train)
+
+Answer:
+CountVectorizer returns a sparse matrix.
+GaussianNB requires a dense NumPy array.
+Therefore, toarray() converts the sparse matrix into a dense matrix.
+
+--------------------------------------------------------------------------------------------
+
+18. Why is toarray() not required for MultinomialNB?
+Answer:
+MultinomialNB can directly work with sparse matrices.
+
+--------------------------------------------------------------------------------------------
+
+19. What is a Sparse Matrix?
+Answer:
+A sparse matrix contains mostly zero values. It saves memory by storing only non-zero values.
+
+--------------------------------------------------------------------------------------------
+
+20. Why do we use CountVectorizer?
+Answer:
+CountVectorizer converts text into numerical word-count vectors that machine learning models can understand.
+
+--------------------------------------------------------------------------------------------
+
+21. What is TF-IDF?
+Answer:
+TF-IDF (Term Frequency–Inverse Document Frequency) measures the importance of words by reducing the weight of common words.
+
+--------------------------------------------------------------------------------------------
+
+22. Difference between CountVectorizer and TF-IDF.
+
+CountVectorizer:
+- Counts word frequency.
+- Simple and fast.
+
+TF-IDF:
+- Measures word importance.
+- Usually provides better accuracy.
+
+--------------------------------------------------------------------------------------------
+
+23. Advantages of Naive Bayes.
+Answer:
+- Very fast.
+- Easy to implement.
+- Works well with high-dimensional data.
+- Requires less training data.
+- Excellent for text classification.
+- Supports multiclass classification.
+
+--------------------------------------------------------------------------------------------
+
+24. Disadvantages of Naive Bayes.
+Answer:
+- Assumes feature independence.
+- Performs poorly with correlated features.
+- Suffers from zero-frequency problems.
+- May be less accurate than advanced algorithms.
+
+--------------------------------------------------------------------------------------------
+
+25. What is the Zero Frequency Problem?
+Answer:
+If a feature never appears in the training data for a class, its probability becomes zero, making the entire prediction for that class zero.
+
+--------------------------------------------------------------------------------------------
+
+26. How do you solve the Zero Frequency Problem?
+Answer:
+By applying Laplace (Add-One) Smoothing.
+
+--------------------------------------------------------------------------------------------
+
+27. What is Laplace Smoothing?
+Answer:
+Laplace Smoothing adds a small constant (usually 1) to every feature count to avoid zero probabilities.
+
+--------------------------------------------------------------------------------------------
+
+28. Which parameter controls Laplace Smoothing?
+Answer:
+alpha
+
+Example:
+MultinomialNB(alpha=1.0)
+
+--------------------------------------------------------------------------------------------
+
+29. What happens if alpha = 0?
+Answer:
+No smoothing is applied, which may lead to zero probabilities and poor predictions.
+
+--------------------------------------------------------------------------------------------
+
+30. Important Parameters of MultinomialNB.
+Answer:
+alpha
+fit_prior
+class_prior
+force_alpha
+
+--------------------------------------------------------------------------------------------
+
+31. What does fit_prior=True mean?
+Answer:
+The model learns prior probabilities from the training dataset.
+
+--------------------------------------------------------------------------------------------
+
+32. What does fit_prior=False mean?
+Answer:
+The model assumes equal prior probabilities for all classes.
+
+--------------------------------------------------------------------------------------------
+
+33. What is class_prior?
+Answer:
+It allows you to manually specify prior probabilities for each class.
+
+--------------------------------------------------------------------------------------------
+
+34. Can Naive Bayes perform Regression?
+Answer:
+No. Naive Bayes is mainly a classification algorithm.
+
+--------------------------------------------------------------------------------------------
+
+35. Is Naive Bayes Parametric or Non-Parametric?
+Answer:
+Parametric because it estimates a fixed number of parameters from the training data.
+
+--------------------------------------------------------------------------------------------
+
+36. Is Naive Bayes a Linear Model?
+Answer:
+Yes. Under its probabilistic assumptions, Naive Bayes produces a linear decision boundary in the transformed feature space.
+
+--------------------------------------------------------------------------------------------
+
+37. Is Naive Bayes Sensitive to Outliers?
+Answer:
+GaussianNB is sensitive because it relies on mean and variance.
+MultinomialNB and BernoulliNB are much less sensitive.
+
+--------------------------------------------------------------------------------------------
+
+38. Time Complexity of Naive Bayes.
+Answer:
+Training: O(n × d)
+Prediction: O(c × d)
+
+Where:
+n = Number of samples
+d = Number of features
+c = Number of classes
+
+--------------------------------------------------------------------------------------------
+
+39. Real-World Applications.
+Answer:
+Spam Detection
+Sentiment Analysis
+Email Filtering
+News Classification
+Language Detection
+Medical Diagnosis
+Document Classification
+Fraud Detection
+
+--------------------------------------------------------------------------------------------
+
+40. Why is MultinomialNB generally better than GaussianNB for NLP?
+Answer:
+Because text data is represented as word counts, which matches the assumptions of MultinomialNB. GaussianNB assumes normally distributed continuous features, making it less suitable for text.
+
+--------------------------------------------------------------------------------------------
+
+41. Which Naive Bayes algorithm should you choose?
+
+Continuous Numerical Data → GaussianNB
+Text with Word Counts → MultinomialNB
+Binary Features → BernoulliNB
+Imbalanced Text Data → ComplementNB
+Categorical Features → CategoricalNB
+
+--------------------------------------------------------------------------------------------
+
+42. What evaluation metrics are used for Naive Bayes?
+Answer:
+Accuracy
+Precision
+Recall
+F1-Score
+Confusion Matrix
+ROC-AUC (for binary classification)
+
+--------------------------------------------------------------------------------------------
+
+43. Can Naive Bayes handle multiclass classification?
+Answer:
+Yes. Naive Bayes naturally supports multiclass classification without requiring modifications.
+
+--------------------------------------------------------------------------------------------
+
+44. Why is Naive Bayes considered a probabilistic classifier?
+Answer:
+Because it predicts class labels based on calculated probabilities using Bayes' Theorem.
+
+--------------------------------------------------------------------------------------------
+
+45. Why is Naive Bayes popular in NLP?
+Answer:
+Because it is fast, memory-efficient, handles high-dimensional sparse text data well, and provides excellent performance for many text classification tasks.
+
+============================= END OF NOTES =============================
